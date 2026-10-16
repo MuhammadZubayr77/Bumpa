@@ -1,3 +1,6 @@
+*, *::before, *::after { box-sizing: border-box; }
+img { max-width: 100%; }
+
 body {
     padding: 0;
     margin: 0;
@@ -8,8 +11,22 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    /* position: fixed; */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
 }
+
+/* .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: sticky;
+    top: 0px;
+    background-color: rgb(255, 255, 255, 0.2);
+    backdrop-filter: 500px;
+} */
 
 .middle-part {
     display: flex;
@@ -44,9 +61,6 @@ body {
     color: white;
 }
 
-.hero {
-
-}
 
 .report {
     width: 23%;
@@ -71,11 +85,18 @@ body {
 }
 
 .green-text {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 500;
+    color: #009444;
+}
+
+/* .green-text {
     font-family: "Google Sans", sans-serif;
     font-size: 50px;
     font-weight: 500;
     color: #009444;
-}
+} */
 
 .simplify {
     text-align: center;
@@ -118,8 +139,8 @@ body {
 
 .get-flex {
     width: 80%;
-    height: 300px;
-    max-height: 300px;
+    height: 360px;
+    max-height: 360px;
     background-color: #F0F7FF;
     border-radius: 20px;
     margin: auto;
@@ -214,5 +235,190 @@ body {
 
 .first {
     margin-top: 105px;
+}
+
+
+
+.logo img { width: 210px; height: auto; display: block; }
+
+.large img { height: 350px; width: auto; }
+.large-image img { height: auto; }
+.reciept { height: auto; }
+
+/* hamburger hidden on desktop */
+.menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
+.menu-icon { display: none; }
+
+/* responsiveness */
+
+
+/* ---------- Tablet and below: hamburger menu ---------- */
+@media (max-width: 1024px) {
+    .navigation {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 10px 20px;
+    }
+
+    .get-flex {
+        height: auto;
+        max-height: none;
+        min-height: 300px;
+    }
+
+    .get-text {
+        margin: 0;
+        padding: 20px 30px;
+    }
+
+    .large img { height: 280px; }
+
+    .report {
+        width: fit-content;
+        max-width: 90%;
+        height: auto;
+        padding: 10px 16px;
+        gap: 8px;
+    }
+
+    .logo img { width: 140px; }
+
+    .menu-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+
+    .menu-toggle:focus-visible + .menu-icon { outline: 2px solid #009444; }
+
+    .menu-icon span,
+    .menu-icon span::before,
+    .menu-icon span::after {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: #222;
+        border-radius: 2px;
+        transition: transform 0.25s, background 0.25s;
+    }
+
+    .menu-icon span { position: relative; }
+
+    .menu-icon span::before,
+    .menu-icon span::after {
+        content: "";
+        position: absolute;
+        left: 0;
+    }
+
+    .menu-icon span::before { top: -7px; }
+    .menu-icon span::after  { top: 7px; }
+
+    /* bars turn into an X when open */
+    .menu-toggle:checked + .menu-icon span { background: transparent; }
+    .menu-toggle:checked + .menu-icon span::before { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle:checked + .menu-icon span::after  { transform: translateY(-7px) rotate(-45deg); }
+
+    /* hidden until the checkbox is ticked */
+    .middle-part,
+    .far-part { display: none; width: 100%; }
+
+    .navigation:has(.menu-toggle:checked) .middle-part {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding-top: 10px;
+}
+
+    .middle-part > div {
+        padding: 14px 4px;
+        border-bottom: 1px solid #e6e6e6;
+    }
+
+    .navigation:has(.menu-toggle:checked) .far-part {
+    display: flex;
+    gap: 12px;
+    padding: 16px 0 8px;
+}
+
+    .far-part .login,
+    .far-part .sign-up {
+        flex: 1;
+        text-align: center;
+        padding: 12px 0;
+    }
+}
+
+/* ---------- Stack the two cards ---------- */
+@media (max-width: 1150px) {
+    .to-flex2 { flex-direction: column; }
+
+    .similar {
+        width: 90%;
+        height: auto;
+        padding-bottom: 40px;
+    }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 768px) {
+    h1 br, .simplify br, .get-text br, .similar br { display: none; }
+
+    .report {
+        width: fit-content;
+        max-width: 90%;
+        height: auto;
+        padding: 10px 16px;
+        gap: 8px;
+        margin-top: 40px;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .report img { width: 20px; height: auto; }
+
+    .hero-text h1 {
+        font-size: clamp(28px, 8vw, 40px);
+        margin-top: 30px;
+        padding: 0 20px;
+        line-height: 1.2;
+    }
+
+    .simplify { font-size: 16px; line-height: 24px; padding: 0 20px; }
+
+    .get-started { width: min(80%, 260px); }
+
+    .large-image { margin-top: 50px; padding: 0 16px; }
+
+    .get-flex {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+        max-height: none;
+        padding: 24px 20px;
+    }
+
+    .get-text { width: 100%; margin: 0; padding: 0; }
+
+    .get { font-size: 26px; }
+
+    .add, .imp { font-size: 16px; line-height: 24px; }
+
+    .large { margin-top: 24px; }
+
+    .large img { width: 100%; max-width: 320px; height: auto; margin: auto; }
+
+    .both { font-size: 24px; margin: 24px; }
+
+    .imp, .yeah { margin: 24px; }
+
+    .first { margin-top: 30px; }
+
+    .reciept { width: 85%; }
 }
 
